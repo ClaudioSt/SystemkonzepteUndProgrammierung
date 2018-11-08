@@ -1,0 +1,34 @@
+private static boolean reserve()
+{
+    boolean seatReserved = false;
+    // TODO: Iterieren Sie über alle Sitze des Kinos (n)
+    for (int i = 0; i < n; i++)
+    {
+        seatReserved = reserveSeat(i);
+        if(seatReserved)
+        {
+            return seatReserved;
+        }
+
+    }
+
+    System.out.println("Seat could not be reserved!");
+    return false;
+}
+
+public static boolean reserveSeat(int seat)
+{
+    boolean freeSeat = false;
+
+    // TODO: Prüfen Sie ob der Sitz belegt ist (1) oder nicht (0)
+    // Verwenden Sie zum Auslesen des Sitzes i, folgenden Aufruf: SeatsAccess.getSeat(seatsFilename, i)
+    freeSeat = SeatsAccess.getSeat(seatsFilename, seat) == 0;
+
+    if(freeSeat)
+    {
+        SeatsAccess.writeSeat(seatsFilename, seat, 1);
+        System.out.println("Seat " + seat + " reserved!");
+    }
+
+    return freeSeat;
+}

@@ -1,0 +1,46 @@
+\documentclass[12pt,pdftex,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{bbm}
+\newcommand{\bbN}{\mathbbm{N}}
+\newcommand{\bbR}{\mathbbm{R}}
+\newcommand{\bbZ}{\mathbbm{Z}}
+\newcommand{\bbI}{\mathbbm{I}}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\lstset{language=Python,basicstyle=\footnotesize}
+\title{Systemkonzepte und -programmierung  Aufgabenblatt 1}
+
+\author{Claudio Stanullo 2942506, ...}
+\date{\today}
+
+\begin {document}
+\maketitle
+\section*{Aufgabe 2: Schwache Fairness}
+\subsection*{a)}
+\textbf{Geben Sie ein Szenario an, in welchem das Programm terminiert. Beachten
+Sie dabei die in der Vorlesung vorgestellte Repräsentation eines Szenarios.}\newline
+\begin{tabular}[c]{|l|l|l|l|}
+\hline
+Prozess p&Prozess q&n&flag\\
+\hline
+p1: while flag is true do&\textbf{q1: while n $>$ 0 do}&1&true\\
+\textbf{p1: while flag is true do} &q3: flag $\leftarrow$ false&1&true\\
+p2: n $\leftarrow$ -1 * n &\textbf{q3: flag $\leftarrow$ false}&1&true\\
+\textbf{p2: n $\leftarrow$ -1 * n}&q1: while n $>$ 0 do&1&false\\
+p1: while flag is true do&\textbf{q1: while n $>$ 0 do}&-1&false\\
+\textbf{p1: while flag is true do}&q4: (halt)&-1&false\\
+p3: (halt)&q4: (halt)&-1&false\\
+\hline
+\end{tabular}
+\subsection*{b)}
+\textbf{Angenommen, wir fordern keine (schwache) Fairness für die Ausführung.
+Beschreiben Sie ein Szenario, welches möglichst wenige unterschiedliche Zeilen ausführt,
+und bei welchem das Programm nicht terminiert.
+}\newline
+\subsection*{c)}
+\textbf{ Angenommen, es ist eine schwach faire Ausführung garantiert. Ist dann
+eine Terminierung garantiert? Begründen Sie.}\newline
+\end {document}

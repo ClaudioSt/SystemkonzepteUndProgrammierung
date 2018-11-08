@@ -1,0 +1,113 @@
+\documentclass[12pt,pdftex,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{bbm}
+\newcommand{\bbN}{\mathbbm{N}}
+\newcommand{\bbR}{\mathbbm{R}}
+\newcommand{\bbZ}{\mathbbm{Z}}
+\newcommand{\bbI}{\mathbbm{I}}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\lstset{language=Python,basicstyle=\footnotesize}
+\title{Systemkonzepte und -programmierung  Aufgabenblatt 1}
+
+\author{Claudio Stanullo (2942506), Léon Lazar (3348154), Tobias Bahr (2945684)}
+\date{\today}
+
+\begin {document}
+\maketitle
+\section*{Aufgabe 1: Kinokarten-Problem}
+\subsection*{a)}
+In der zweiten Spalte stehen nur Nullen, da alle Plätze noch leer sind.
+
+\texttt{1 0}
+
+\subsection*{e)}
+
+
+\texttt{i. Ja. Jeder Schalter iteriert über die 100 Sitze. In Summe können also nicht mehr als 200 Plätze vergeben können..}\newline\newline
+\texttt{ii. Nein. Obwohl es nur 100 zu reservierende Sitze gibt, wurden bei diesen Test in Summe 102 reserviert.}\newline\newline
+\texttt{iii. Ja. Da über die Anzahl der Sitze iteriert wird und in die Datei nach der Reservierung die 1 geschrieben wird, werden alle Sitze mindestens einmal vergeben (Sofern Datei zurückgesetzt wurde). }\newline\newline
+\texttt{iv. Ja. Eine Anfrage wird nur abgelehnt, wenn in der Datei beim jeweiligen Sitz bereits eine 1 steht, dieser Platz also bereits tatsächlich vergeben wurde.}\newline\newline
+
+\section*{Aufgabe 2: }
+
+\subsection*{a)}
+\subsubsection*{i}
+Registermaschine:\newline
+\begin{tabular}{ll} 
+\toprule
+\multicolumn {2}{c }{Programm $\pi$} \\
+\midrule
+\multicolumn {2}{c}{Integer n $\leftarrow$ 6}\\
+\multicolumn {2}{c}{Integer m $\leftarrow$ 2}\\
+\midrule
+\multicolumn {1}{c}{p}&\multicolumn {1}{c}{q}\\
+\midrule
+p1: LOAD R1, n & q1: LOAD R1, n\\
+p2: LOAD R2, m & q2: LOAD R2, m\\
+p3: Mul R1, R2 & q3: SUB R1, R2\\
+p4: STORE R1, n & q4: STORE R1, m\\
+\bottomrule
+\end{tabular}
+\newline\newline\newline
+Stapelmaschine:\newline
+\begin{tabular}{ll} 
+\toprule
+\multicolumn {2}{c }{Programm $\pi$} \\
+\midrule
+\multicolumn {2}{c}{Integer n $\leftarrow$ 6}\\
+\multicolumn {2}{c}{Integer m $\leftarrow$ 2}\\
+\midrule
+\multicolumn {1}{c}{p}&\multicolumn {1}{c}{q}\\
+\midrule
+p1: PUSH n & q1: PUSH n\\
+p2: PUSH m & q2: PUSH m\\
+p3: MUL & q3: SUB\\
+p4: POP n & q4: POP m\\
+\bottomrule
+\end{tabular}
+\newline
+\subsubsection*{ii}
+Registermaschine:\newline
+$p1 \rightarrow q1 \rightarrow p2 \rightarrow q2 \rightarrow p3 \rightarrow p4 \rightarrow q4$\newline
+Stapelmasching:\newline
+$p1 \rightarrow q1 \rightarrow p2 \rightarrow q2 \rightarrow p3 \rightarrow p4 \rightarrow q4$\newline\newline
+\subsubsection*{iii}
+POP. Bzw. p4, q4. Denn dies ändert die Eingangsparameter für den jeweils anderen Prozess.\newline
+\subsubsection*{iv}
+8 Mögliche Plätze für p1 -p4 und q1 -q4 \newline
+Daraus ergeben sich 3 Bedingungen für die Reihenfolge: \newline
+1) q3,q4 müssen vor p2 kommen\newline
+2) vor q3 muss q1 und q2 kommen\newline
+3) p1 kann vor q3 kommen \newline\newline
+Es folgt:\newline\newline
+Die Abläufe:\newline
+q1,q2,p1,q3,...\newline
+q1,p1,q2,q3,...\newline
+p1,q1,q2,q3,...\newline\newline
+Also 3 Möglichkeiten.\newline
+Wenn jedoch alle qi's ausgeführt wurden und nur p2 -p4 übrig bleiben. Gibt es 	insgesamt 3 Möglichkeiten\newline
+
+\subsection*{b)}
+ 
+\subsubsection*{i}
+4: $p1 \rightarrow q1 \rightarrow q2 \rightarrow q3 \rightarrow q4 \rightarrow p2 \rightarrow p3 \rightarrow p4$\newline
+3: $p1 \rightarrow q1 \rightarrow p2 \rightarrow q2 \rightarrow p3 \rightarrow q3 \rightarrow p4 \rightarrow q4$\newline
+2: $p1 \rightarrow q1 \rightarrow p2 \rightarrow q2 \rightarrow p3 \rightarrow q3 \rightarrow q4 \rightarrow p4$\newline\newline
+Ja, es kann das Ergebnis 6 geben;\newline\newline
+$q1 \rightarrow q2 \rightarrow q3 \rightarrow q4 \rightarrow p1 \rightarrow p2 \rightarrow p3 \rightarrow p4$\newline
+
+
+\subsubsection*{i}
+ Ändert sich nicht ggü. i. Bei i kann man q1 und q2 gleichzeitig ausführen, ohne dass es eine Auswirkung hat, nur die Platzierung von q1/q2 ist entscheidend.\newline
+ 
+
+\subsubsection*{i}
+ 3: $q1/q2/q3 \rightarrow p1/p2/p3 \rightarrow p4 \rightarrow q4$\newline
+2: $q1/q2/q3 \rightarrow p1/p2/p3 \rightarrow q4 \rightarrow p4$\newline
+
+
+\end {document}
